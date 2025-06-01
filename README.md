@@ -2,6 +2,14 @@
 
 #간단한 건강 관리 프로그램입니다.
 
+## 🛠 개발 환경
+
+- **IDE**: IntelliJ IDEA Community Edition
+- **JDK**: Amazon Corretto OpenJDK 11
+- **Database**: MySQL 8
+- **ORM**: MyBatis
+- **View**: JSP
+- **Server**: Apache Tomcat 9
 
 ## 데이터베이스 및 계정 생성
 
