@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Profile">
+    <insert id="save" parameterType="profile">
+        INSERT INTO profile_table(member_id, weight, height, hobby, introduction, favorite_exercises)
+        VALUES (#{memberId}, #{weight}, #{height}, #{hobby}, #{introduction}, #{favoriteExercises})
+    </insert>
+
+    <update id="update" parameterType="profile">
+        UPDATE profile_table
+        SET weight=#{weight}, height=#{height}, hobby=#{hobby}, introduction=#{introduction}, favorite_exercises=#{favoriteExercises}
+        WHERE member_id=#{memberId}
+    </update>
+
+    <select id="findByMemberId" parameterType="long" resultType="profile">
+        SELECT
+            id,
+            member_id,
+            weight,
+            height,
+            hobby,
+            introduction,
+            favorite_exercises AS favoriteExercises
+        FROM profile_table
+        WHERE member_id = #{memberId}
+    </select>
+</mapper>

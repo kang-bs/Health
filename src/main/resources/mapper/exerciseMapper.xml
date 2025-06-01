@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="ExerciseRecord">
+    <insert id="save" parameterType="exerciseRecord">
+        INSERT INTO exercise_record (member_id, exercise_date, exercise_type, duration, calories)
+        VALUES (#{memberId}, #{exerciseDate}, #{exerciseType}, #{duration}, #{calories})
+    </insert>
+
+    <select id="findByMemberId" parameterType="long" resultType="exerciseRecord">
+        SELECT
+        id,
+        member_id,
+        exercise_date AS exerciseDate,
+        exercise_type AS exerciseType,
+        duration,
+        calories
+        FROM exercise_record
+        WHERE member_id = #{memberId}
+        ORDER BY exercise_date DESC
+    </select>
+
+    <!-- 날짜별 통계 -->
+    <select id="statByDate" parameterType="long" resultType="exerciseStat">
+        SELECT
+            DATE_FORMAT(exercise_date, '%Y-%m-%d') AS period,
+            SUM(duration) AS totalDuration,
+            SUM(calories) AS totalCalories
+        FROM exercise_record
+        WHERE member_id = #{memberId}
+        GROUP BY period
+        ORDER BY period DESC
+    </select>
+
+
+    <!-- 월별 통계 -->
+    <select id="statByMonth" parameterType="long" resultType="exerciseStat">
+        SELECT
+            DATE_FORMAT(exercise_date, '%Y-%m') AS period,
+            SUM(duration) AS totalDuration,
+            SUM(calories) AS totalCalories
+        FROM exercise_record
+        WHERE member_id = #{memberId}
+        GROUP BY period
+        ORDER BY period DESC
+    </select>
+
+    <!-- 주차별 통계 -->
+    <select id="statByWeek" parameterType="long" resultType="exerciseStat">
+        SELECT
+            CONCAT(YEAR(exercise_date), ' ', LPAD(MONTH(exercise_date),2,'0'), ' ', CEIL(DAYOFMONTH(exercise_date)/7), '째주') AS period,
+            SUM(duration) AS totalDuration,
+            SUM(calories) AS totalCalories
+        FROM exercise_record
+        WHERE member_id = #{memberId}
+        GROUP BY period
+        ORDER BY period DESC
+    </select>
+
+    <!-- 운동기록 삭제 -->
+    <delete id="deleteByDate" parameterType="map">
+        DELETE FROM exercise_record
+        WHERE member_id = #{memberId}
+          AND exercise_date = #{exerciseDate}
+    </delete>
+
+    <!-- 2) 개별 기록 삭제 (id 기준) -->
+    <delete id="deleteById" parameterType="long">
+        DELETE FROM exercise_record WHERE id = #{id}
+    </delete>
+
+</mapper>
