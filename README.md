@@ -5,14 +5,13 @@
 
 
 
+# MySQL 코드
 
-#MySql 코드
-
+```sql
 DROP TABLE IF EXISTS friend;
 DROP TABLE IF EXISTS exercise_record;
 DROP TABLE IF EXISTS profile_table;
 DROP TABLE IF EXISTS member_table;
-
 
 CREATE TABLE member_table (
     id BIGINT PRIMARY KEY AUTO_INCREMENT,
