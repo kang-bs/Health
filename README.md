@@ -16,7 +16,7 @@
 ```sql
 -- 계정 생성하기
 create database db_codingrecipe;
-create user user_codingrecipe@localhost identified by '1234';
+create user user_codingrecipe@localhost identified by '8605';
 grant all privileges on db_codingrecipe.* to user_codingrecipe@localhost;
 
 # MySQL 코드
