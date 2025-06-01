@@ -3,7 +3,13 @@
 #간단한 건강 관리 프로그램입니다.
 
 
+## 데이터베이스 및 계정 생성
 
+```sql
+-- 계정 생성하기
+create database db_codingrecipe;
+create user user_codingrecipe@localhost identified by '1234';
+grant all privileges on db_codingrecipe.* to user_codingrecipe@localhost;
 
 # MySQL 코드
 
