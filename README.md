@@ -13,7 +13,6 @@ grant all privileges on db_codingrecipe.* to user_codingrecipe@localhost;
 
 # MySQL 코드
 
-```sql
 DROP TABLE IF EXISTS friend;
 DROP TABLE IF EXISTS exercise_record;
 DROP TABLE IF EXISTS profile_table;
